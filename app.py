@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import seaborn as sns
+import matplotlib.pyplot as plt
 import os
 
 from sklearn.datasets import load_iris
@@ -20,7 +22,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# 2. AESTHETIC PURPLE THEME & STYLING
+# 2. AESTHETIC PURPLE THEME & ANIMATIONS
 # ==========================================
 st.markdown("""
 <style>
@@ -30,7 +32,26 @@ html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Vibrant Aesthetic Purple Gradient across all Streamlit containers */
+/* 1. KEYFRAME ANIMATIONS */
+@keyframes floatEffect {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes textShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.35); }
+    50% { box-shadow: 0 0 32px rgba(217, 70, 239, 0.7); }
+    100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.35); }
+}
+
+/* 2. MAIN APP BACKGROUND - DEEP PURPLE GRADIENT */
 [data-testid="stAppViewContainer"], 
 .stApp, 
 .main, 
@@ -39,7 +60,7 @@ html, body, [class*="css"] {
     color: #FAF5FF !important;
 }
 
-/* Deep Royal Violet Sidebar */
+/* 3. SIDEBAR IN ROYAL PURPLE */
 [data-testid="stSidebar"], 
 [data-testid="stSidebar"] > div:first-child {
     background: linear-gradient(180deg, #120026 0%, #240542 100%) !important;
@@ -49,7 +70,7 @@ html, body, [class*="css"] {
     color: #F3E8FF !important;
 }
 
-/* Typography & Headings */
+/* 4. TYPOGRAPHY */
 h1, h2, h3, h4, h5, h6 {
     color: #FFFFFF !important;
     font-weight: 700 !important;
@@ -58,31 +79,67 @@ p, span, label, .stMarkdown {
     color: #F3E8FF !important;
 }
 
-/* Hero Banner on Home Page */
-.purple-hero {
-    background: linear-gradient(135deg, rgba(147, 51, 234, 0.4) 0%, rgba(76, 29, 149, 0.65) 100%);
-    border: 1px solid rgba(216, 180, 254, 0.35);
-    padding: 35px 25px;
-    border-radius: 24px;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 12px 35px rgba(18, 0, 38, 0.55);
-    margin-bottom: 25px;
+/* 5. HERO BANNER WITH FLOATING & SHIMMER EFFECTS */
+.animated-hero {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.45) 0%, rgba(76, 29, 149, 0.75) 100%);
+    border: 1px solid rgba(216, 180, 254, 0.4);
+    padding: 36px 25px;
+    border-radius: 26px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     text-align: center;
-}
-.purple-hero h1 {
-    font-size: 2.7rem;
-    margin-bottom: 8px;
-    background: linear-gradient(90deg, #FFFFFF, #E9D5FF, #F472B6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.purple-hero p {
-    font-size: 1.15rem;
-    color: #DDD6FE !important;
+    animation: pulseGlow 4s infinite ease-in-out;
+    margin-bottom: 25px;
 }
 
-/* Frosted Glass Cards */
+.shimmer-title {
+    font-size: 2.7rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #FFFFFF, #E9D5FF, #F472B6, #C084FC, #FFFFFF);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 6s ease infinite;
+}
+
+.floating-flower {
+    display: inline-block;
+    animation: floatEffect 3.5s ease-in-out infinite;
+    font-size: 2.4rem;
+}
+
+/* 6. GLOWING METRIC CARDS WITH HOVER LIFT */
+.animated-metric {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.5) 0%, rgba(192, 38, 211, 0.45) 100%);
+    border: 1px solid rgba(216, 180, 254, 0.4);
+    border-radius: 20px;
+    padding: 22px 12px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.animated-metric:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 14px 32px rgba(217, 70, 239, 0.6);
+    border-color: rgba(244, 114, 182, 0.8);
+}
+.animated-metric h2 {
+    color: #FFFFFF !important;
+    font-size: 2.3rem;
+    margin: 0;
+    font-weight: 700;
+}
+.animated-metric p {
+    color: #E9D5FF !important;
+    font-size: 0.95rem;
+    margin-top: 4px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+/* 7. FROSTED GLASS CARDS */
 .glass-card {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(16px);
@@ -94,37 +151,31 @@ p, span, label, .stMarkdown {
     margin-bottom: 24px;
 }
 
-/* Glowing Purple Metric Cards */
-.purple-metric {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.45) 0%, rgba(192, 38, 211, 0.45) 100%);
-    border: 1px solid rgba(216, 180, 254, 0.4);
+/* 8. SPECIES SHOWCASE CARDS */
+.species-card {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(216, 180, 254, 0.25);
     border-radius: 18px;
-    padding: 20px 10px;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.purple-metric:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(168, 85, 247, 0.5);
+.species-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(168, 85, 247, 0.45);
+    border-color: rgba(244, 114, 182, 0.6);
 }
-.purple-metric h2 {
-    color: #FFFFFF !important;
-    font-size: 2.2rem;
-    margin: 0;
-    font-weight: 700;
-}
-.purple-metric p {
-    color: #E9D5FF !important;
-    font-size: 0.95rem;
-    margin-top: 4px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    font-weight: 500;
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 8px;
 }
 
-/* Vibrant Purple-Pink Action Buttons */
+/* 9. VIBRANT PURPLE-PINK ACTION BUTTONS */
 div.stButton > button:first-child {
     background: linear-gradient(90deg, #9333EA 0%, #D946EF 50%, #EC4899 100%) !important;
     color: #FFFFFF !important;
@@ -148,7 +199,7 @@ div.stButton > button:first-child:hover {
 # ==========================================
 @st.cache_data
 def get_dataset():
-    # Looks for your uploaded 5,390 row dataset file in the repository
+    # Priority file lookup for your 5,390 flower dataset in the repo
     candidate_files = [
         "IRIS FLOWER CLASSIFICATION.csv.xlsx",
         "IRIS FLOWER CLASSIFICATION.csv",
@@ -165,7 +216,7 @@ def get_dataset():
             except Exception:
                 continue
 
-    # Search directory for any iris data file
+    # Fallback to scanning current directory
     if df is None:
         for f in os.listdir("."):
             if f.endswith((".csv", ".xlsx")) and "iris" in f.lower():
@@ -175,14 +226,14 @@ def get_dataset():
                 except Exception:
                     pass
 
-    # Fallback to standard iris dataset if file is not found
+    # Fallback to sklearn if no dataset file is placed in repository
     if df is None:
         raw = load_iris()
         df = pd.DataFrame(raw.data, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
         df['species'] = raw.target
         df['species'] = df['species'].map({0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'})
     else:
-        # Standardize column names to: sepal_length, sepal_width, petal_length, petal_width, species
+        # Standardize column names
         df.columns = [c.strip().lower().replace(" ", "_").replace("(cm)", "").strip("_") for c in df.columns]
         if 'species' in df.columns:
             df['species'] = df['species'].astype(str).str.replace('Iris-', '').str.capitalize()
@@ -208,7 +259,7 @@ accuracy = accuracy_score(y_test, y_pred_model)
 flower_info = {
     "Setosa": {
         "image": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Iris_setosa_-_Botanischer_Garten_M%C3%BCnchen-Nymphenburg_-_DSC09255.JPG",
-        "desc": "🌸 **Iris Setosa** is characterized by small, delicate petals and wide sepals. It is distinct and easily separable from the other two species."
+        "desc": "🌸 **Iris Setosa** is characterized by small, delicate petals and wide sepals. It is distinct and cleanly separable from the other two species."
     },
     "Versicolor": {
         "image": "https://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg",
@@ -249,49 +300,59 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-# PAGE 1: 🏠 HOME
+# PAGE 1: 🏠 ANIMATED AESTHETIC HOME
 # ==========================================
 if page == "🏠 Home":
+    # 1. Shimmering Floating Hero Banner
     st.markdown("""
-    <div class="purple-hero">
-        <h1>🌸 Iris Flower AI Classifier</h1>
-        <p>An intelligent machine learning application for botanical analysis and species classification</p>
+    <div class="animated-hero">
+        <span class="floating-flower">🌸</span>
+        <h1 class="shimmer-title">Iris Flower AI Classifier</h1>
+        <p style="font-size: 1.15rem; color: #DDD6FE; margin: 0 auto; max-width: 650px;">
+            An intelligent machine learning platform for botanical recognition, morphology analysis, and real-time species classification.
+        </p>
+        <div style="margin-top: 15px;">
+            <span style="background: rgba(168, 85, 247, 0.4); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(216, 180, 254, 0.4); font-size: 0.85rem; color: #FAF5FF; font-weight: 600;">
+                ⚡ Model Status: Active & Trained (Random Forest)
+            </span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
-    # 4 Glowing Metric Cards (Dynamic for 5,390 flowers)
+    # 2. Glowing Interactive 4-Metric Grid (5,390 Flowers)
     m1, m2, m3, m4 = st.columns(4)
     with m1:
         st.markdown(f"""
-        <div class="purple-metric">
+        <div class="animated-metric">
             <h2>{len(df):,}</h2>
             <p>Total Flowers</p>
         </div>
         """, unsafe_allow_html=True)
     with m2:
         st.markdown(f"""
-        <div class="purple-metric">
+        <div class="animated-metric">
             <h2>{df['species'].nunique()}</h2>
             <p>Species</p>
         </div>
         """, unsafe_allow_html=True)
     with m3:
         st.markdown(f"""
-        <div class="purple-metric">
+        <div class="animated-metric">
             <h2>{len(feature_names)}</h2>
             <p>Features</p>
         </div>
         """, unsafe_allow_html=True)
     with m4:
         st.markdown(f"""
-        <div class="purple-metric">
+        <div class="animated-metric">
             <h2>{accuracy * 100:.2f}%</h2>
             <p>Model Accuracy</p>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("")
-    
+
+    # 3. Specimen Showcase & Feature Overview
     col_img, col_info = st.columns([1.2, 1])
     with col_img:
         st.image(
@@ -301,16 +362,57 @@ if page == "🏠 Home":
         )
     with col_info:
         st.markdown(f"""
-        <div class="glass-card">
-            <h3>✨ Welcome to the Iris AI Dashboard</h3>
-            <p>Trained on <b>{len(df):,} botanical records</b> across three distinct Iris species (Setosa, Versicolor, and Virginica).</p>
-            <hr style="border: 0; border-top: 1px solid rgba(216, 180, 254, 0.2); margin: 15px 0;">
-            <p><b>🔍 Features & Navigation:</b></p>
-            <ul>
-                <li><b>🔮 Prediction:</b> Input measurements to identify an unknown flower and view model confidence.</li>
-                <li><b>📊 Dashboard:</b> Explore the confusion matrix, feature distributions, and correlation maps.</li>
-                <li><b>ℹ️ About:</b> Review project documentation and model specifications.</li>
+        <div class="glass-card" style="height: 100%;">
+            <h3 style="margin-top: 0;">✨ Botanical Intelligence</h3>
+            <p>Trained across <b>{len(df):,} botanical records</b>, this model extracts patterns from four physical features:</p>
+            <ul style="color: #E9D5FF; line-height: 1.8;">
+                <li><b>🌿 Sepal Dimensions:</b> Outer protective calyx measurements.</li>
+                <li><b>🌺 Petal Dimensions:</b> Core distinguishing floral proportions.</li>
             </ul>
+            <hr style="border: 0; border-top: 1px solid rgba(216, 180, 254, 0.25); margin: 18px 0;">
+            <p style="margin-bottom: 6px;"><b>🚀 Quick Navigation:</b></p>
+            <p style="font-size: 0.95rem; color: #DDD6FE; margin: 0;">
+                Navigate to <b>🔮 Prediction</b> to test custom inputs, or <b>📊 Dashboard</b> to inspect the Confusion Matrix and feature correlations!
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+
+    # 4. Interactive 3-Species Showcase Cards
+    st.markdown("<h3 style='text-align: center; margin-bottom: 20px;'>🌸 Meet the Three Iris Species</h3>", unsafe_allow_html=True)
+    s1, s2, s3 = st.columns(3)
+    
+    with s1:
+        st.markdown("""
+        <div class="species-card">
+            <h4 style="color: #F472B6 !important; margin: 0 0 6px 0;">Iris Setosa</h4>
+            <p style="font-size: 0.9rem; color: #DDD6FE; margin: 0;">Smallest petals, high sepal width. Cleanest separation boundary.</p>
+            <span class="badge" style="background: rgba(244, 114, 182, 0.3); color: #FCE7F3; border: 1px solid #F472B6;">
+                1,543 Samples
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with s2:
+        st.markdown("""
+        <div class="species-card">
+            <h4 style="color: #C084FC !important; margin: 0 0 6px 0;">Iris Versicolor</h4>
+            <p style="font-size: 0.9rem; color: #DDD6FE; margin: 0;">Medium petal and sepal sizes. Distinct blue-violet coloration.</p>
+            <span class="badge" style="background: rgba(192, 132, 252, 0.3); color: #F3E8FF; border: 1px solid #C084FC;">
+                1,901 Samples
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with s3:
+        st.markdown("""
+        <div class="species-card">
+            <h4 style="color: #818CF8 !important; margin: 0 0 6px 0;">Iris Virginica</h4>
+            <p style="font-size: 0.9rem; color: #DDD6FE; margin: 0;">Longest petals and sepals. Deep violet-purple structures.</p>
+            <span class="badge" style="background: rgba(129, 140, 248, 0.3); color: #E0E7FF; border: 1px solid #818CF8;">
+                1,946 Samples
+            </span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -319,9 +421,9 @@ if page == "🏠 Home":
 # ==========================================
 elif page == "🔮 Prediction":
     st.markdown("""
-    <div class="purple-hero" style="padding: 24px; margin-bottom: 20px;">
-        <h1 style="font-size: 2.2rem;">🔮 Predict Flower Species</h1>
-        <p>Adjust the morphological sliders to classify your Iris flower in real time</p>
+    <div class="animated-hero" style="padding: 24px; margin-bottom: 20px;">
+        <h1 class="shimmer-title" style="font-size: 2.2rem;">🔮 Predict Flower Species</h1>
+        <p style="color: #DDD6FE; margin: 0;">Adjust the morphological sliders to classify your Iris flower in real time</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -430,9 +532,9 @@ elif page == "🔮 Prediction":
 # ==========================================
 elif page == "📊 Dashboard":
     st.markdown("""
-    <div class="purple-hero" style="padding: 24px; margin-bottom: 20px;">
-        <h1 style="font-size: 2.2rem;">📊 Analysis Graphs & Model Evaluation</h1>
-        <p>Interactive confusion matrix, correlation heatmap, and feature distributions</p>
+    <div class="animated-hero" style="padding: 24px; margin-bottom: 20px;">
+        <h1 class="shimmer-title" style="font-size: 2.2rem;">📊 Analysis Graphs & Model Evaluation</h1>
+        <p style="color: #DDD6FE; margin: 0;">Interactive confusion matrix, correlation heatmap, and feature distributions</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -569,9 +671,9 @@ elif page == "📊 Dashboard":
 # ==========================================
 elif page == "ℹ️ About":
     st.markdown("""
-    <div class="purple-hero" style="padding: 24px; margin-bottom: 20px;">
-        <h1 style="font-size: 2.2rem;">ℹ️ About This AI Project</h1>
-        <p>Project architecture, dataset background, and technical methodology</p>
+    <div class="animated-hero" style="padding: 24px; margin-bottom: 20px;">
+        <h1 class="shimmer-title" style="font-size: 2.2rem;">ℹ️ About This AI Project</h1>
+        <p style="color: #DDD6FE; margin: 0;">Project architecture, dataset background, and technical methodology</p>
     </div>
     """, unsafe_allow_html=True)
     
