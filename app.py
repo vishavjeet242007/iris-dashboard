@@ -97,16 +97,16 @@ if page=="🏠 Home":
 
     col1,col2,col3,col4=st.columns(4)
 
-    col1.metric("Flowers",5390)
+    col1.metric("Flowers",150)
     col2.metric("Species",3)
     col3.metric("Features",4)
     col4.metric("Accuracy",f"{accuracy_score(y_test,y_pred)*100:.2f}%")
 
     st.write("")
-    
 
+    st.success("Welcome to the Professional Iris AI Dashboard")
 
-        st.balloons()
+    st.image("https://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg",width=500)
         
 
 
