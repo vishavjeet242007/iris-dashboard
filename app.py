@@ -1,143 +1,109 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Page settings
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import *
+
 st.set_page_config(
-    page_title="Iris Flower Classification",
+    page_title="Iris Flower AI",
     page_icon="🌸",
     layout="wide"
 )
 
-# Custom styling
 st.markdown("""
 <style>
-.main {
-    background-color: #FAF8FF;
+
+body{
+background:#faf8ff;
 }
-h1 {
-    color: #3B2F7F;
+
+.stApp{
+background:linear-gradient(135deg,#E9E3FA,#FAF8FF,#F4A6C8);
 }
-.stButton>button {
-    background-color: #8E6BD9;
-    color: white;
-    border-radius: 10px;
+
+h1,h2,h3{
+color:#3B2F7F;
 }
-.metric-card {
-    background: #E9E3FA;
-    padding: 15px;
-    border-radius: 15px;
+
+.block-container{
+padding-top:2rem;
 }
+
+.card{
+padding:20px;
+border-radius:20px;
+background:white;
+box-shadow:0px 8px 25px rgba(0,0,0,.15);
+}
+
 </style>
-""", unsafe_allow_html=True)
+""",unsafe_allow_html=True)
 
-# Title
-st.title("🌸 Iris Flower Classification Dashboard")
-st.write("Identify Iris flower species using Artificial Intelligence.")
+iris=load_iris()
 
-# Load dataset
-df = pd.read_csv("IRIS FLOWER CLASSIFICATION.csv")
-# Navigation Menu
-page = st.sidebar.radio(
-    "📋 Navigation",
-    ["🏠 Home", "🤖 Prediction", "📊 Dashboard", "ℹ️ About"]
+df=pd.DataFrame(
+iris.data,
+columns=iris.feature_names
 )
-if page == "🏠 Home":
 
-    st.header("🌸 Welcome to Iris Flower Classification")
+df["species"]=iris.target
+df["species"]=df["species"].map({
+0:"Setosa",
+1:"Versicolor",
+2:"Virginica"
+})
 
-    st.write("""
-    This AI application predicts the species of an Iris flower
-    using Machine Learning.
-    """)
+X=df.iloc[:,:4]
 
-    col1, col2, col3, col4 = st.columns(4)
+y=df["species"]
 
-    col1.metric("🌼 Samples", len(df))
-    col2.metric("🌺 Species", df["species"].nunique())
-    col3.metric("🍃 Features", 4)
-    col4.metric("🎯 Accuracy", "98%")
-
-    st.markdown("---")
-
-    st.subheader("About the Dataset")
-
-    st.write("""
-    - **5390 Flower Samples**
-    - **3 Species**
-    - Iris Setosa
-    - Iris Versicolor
-    - Iris Virginica
-    """)
-    st.header("🤖 Iris Flower Prediction")
-
-sepal_length = st.slider("Sepal Length", 4.0, 8.0, 5.5)
-sepal_width = st.slider("Sepal Width", 2.0, 4.5, 3.0)
-petal_length = st.slider("Petal Length", 1.0, 7.0, 4.0)
-petal_width = st.slider("Petal Width", 0.1, 2.5, 1.3)
-
-if st.button("Predict"):
-    prediction = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])
-    st.success(f"Predicted Species: {prediction[0]}")
-    from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
-st.header("📊 Model Performance")
-
-st.metric("Accuracy", f"{accuracy_score(y_test, y_pred):.2f}")
-st.metric("Precision", f"{precision_score(y_test, y_pred, average='weighted'):.2f}")
-st.metric("Recall", f"{recall_score(y_test, y_pred, average='weighted'):.2f}")
-st.metric("F1 Score", f"{f1_score(y_test, y_pred, average='weighted'):.2f}")
-from sklearn.metrics import confusion_matrix
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-st.header("📌 Confusion Matrix")
-
-cm = confusion_matrix(y_test, y_pred)
-
-fig, ax = plt.subplots(figsize=(5,4))
-sns.heatmap(cm, annot=True, cmap="Blues", fmt="d", ax=ax)
-ax.set_xlabel("Predicted")
-ax.set_ylabel("Actual")
-st.pyplot(fig)
-from sklearn.metrics import classification_report
-
-st.header("📄 Classification Report")
-
-report = classification_report(y_test, y_pred)
-st.text(report)
-st.header("🌸 Species Distribution")
-
-fig, ax = plt.subplots()
-df['species'].value_counts().plot(kind='bar', color=['pink','purple','green'], ax=ax)
-st.pyplot(fig)
-st.header("🔥 Correlation Heatmap")
-
-fig, ax = plt.subplots(figsize=(7,5))
-sns.heatmap(df.iloc[:,0:4].corr(), annot=True, cmap="coolwarm", ax=ax)
-st.pyplot(fig)
-st.header("📈 Scatter Plot")
-
-fig, ax = plt.subplots()
-sns.scatterplot(
-    data=df,
-    x="petal_length",
-    y="petal_width",
-    hue="species",
-    ax=ax
+X_train,X_test,y_train,y_test=train_test_split(
+X,
+y,
+test_size=.2,
+random_state=42
 )
-st.pyplot(fig)
-st.header("📊 Histogram")
 
-fig, ax = plt.subplots()
-df["sepal_length"].hist(ax=ax)
-st.pyplot(fig)
-st.header("📦 Box Plot")
+model=RandomForestClassifier()
 
-fig, ax = plt.subplots()
-sns.boxplot(data=df.iloc[:,0:4], ax=ax)
-st.pyplot(fig)
-st.header("📋 Dataset")
+model.fit(X_train,y_train)
 
-st.dataframe(df)
+y_pred=model.predict(X_test)
+
+st.sidebar.title("🌸 Navigation")
+
+page=st.sidebar.radio(
+"",
+[
+"🏠 Home",
+"🤖 Prediction",
+"📊 Dashboard",
+"ℹ About"
+]
+)
+
+if page=="🏠 Home":
+
+    st.title("🌸 Iris Flower Classification")
+
+    st.subheader("Identify Iris Flowers using Artificial Intelligence")
+
+    col1,col2,col3,col4=st.columns(4)
+
+    col1.metric("Flowers",150)
+    col2.metric("Species",3)
+    col3.metric("Features",4)
+    col4.metric("Accuracy",f"{accuracy_score(y_test,y_pred)*100:.2f}%")
+
+    st.write("")
+
+    st.success("Welcome to the Professional Iris AI Dashboard")
+
+    st.image("https://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg",width=500)
