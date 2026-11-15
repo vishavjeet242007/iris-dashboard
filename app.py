@@ -15,13 +15,13 @@ from sklearn.model_selection import train_test_split
 # ==========================================
 st.set_page_config(
     page_title="Iris Flower AI",
-    page_icon="🌸",
+    page_icon="🌿",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ==========================================
-# 2. AESTHETIC PURPLE THEME, GLASSMORPHISM & EFFECTS
+# 2. MIDNIGHT EMERALD & BOTANICAL TEAL THEME
 # ==========================================
 st.markdown("""
 <style>
@@ -40,13 +40,13 @@ html, body, [class*="css"] {
 
 @keyframes floatEffect {
     0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(3deg); }
+    50% { transform: translateY(-10px) rotate(4deg); }
     100% { transform: translateY(0px) rotate(0deg); }
 }
 
 @keyframes orbFloat {
     0% { transform: translate(0px, 0px) scale(1); }
-    50% { transform: translate(25px, -30px) scale(1.08); }
+    50% { transform: translate(28px, -28px) scale(1.08); }
     100% { transform: translate(0px, 0px) scale(1); }
 }
 
@@ -57,9 +57,9 @@ html, body, [class*="css"] {
 }
 
 @keyframes pulseGlow {
-    0% { box-shadow: 0 0 18px rgba(168, 85, 247, 0.35), inset 0 0 18px rgba(168, 85, 247, 0.08); }
-    50% { box-shadow: 0 0 38px rgba(217, 70, 239, 0.65), inset 0 0 24px rgba(244, 114, 182, 0.14); }
-    100% { box-shadow: 0 0 18px rgba(168, 85, 247, 0.35), inset 0 0 18px rgba(168, 85, 247, 0.08); }
+    0% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.28), inset 0 0 18px rgba(6, 182, 212, 0.08); }
+    50% { box-shadow: 0 0 38px rgba(45, 212, 191, 0.55), inset 0 0 24px rgba(16, 185, 129, 0.14); }
+    100% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.28), inset 0 0 18px rgba(6, 182, 212, 0.08); }
 }
 
 @keyframes fadeInUp {
@@ -67,64 +67,64 @@ html, body, [class*="css"] {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 2. ANIMATED MESH BACKGROUND */
+/* 2. ANIMATED MESH BACKGROUND (DEEP EMERALD & OCEAN TEAL) */
 [data-testid="stAppViewContainer"],
 .stApp,
 .main {
-    background: linear-gradient(-45deg, #13002B, #2A0845, #4C1D95, #6D28D9, #3B0764) !important;
+    background: linear-gradient(-45deg, #021412, #052622, #083832, #0B463E, #041D24) !important;
     background-size: 300% 300% !important;
     animation: gradientDrift 18s ease infinite !important;
-    color: #FAF5FF !important;
+    color: #ECFDF5 !important;
 }
 
 [data-testid="stHeader"] {
-    background: rgba(19, 0, 43, 0.35) !important;
-    backdrop-filter: blur(10px) !important;
+    background: rgba(2, 20, 18, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
 }
 
 /* AMBIENT FLOATING ORBS */
 .ambient-orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(85px);
-    opacity: 0.32;
+    filter: blur(90px);
+    opacity: 0.28;
     pointer-events: none;
     z-index: 0;
-    animation: orbFloat 12s ease-in-out infinite;
+    animation: orbFloat 13s ease-in-out infinite;
 }
 .orb-1 {
     width: 340px;
     height: 340px;
-    background: #D946EF;
+    background: #10B981;
     top: -60px;
     right: 6%;
 }
 .orb-2 {
-    width: 280px;
-    height: 280px;
-    background: #818CF8;
-    bottom: 5%;
-    left: 18%;
+    width: 290px;
+    height: 290px;
+    background: #06B6D4;
+    bottom: 4%;
+    left: 16%;
     animation-delay: -5s;
 }
 
 /* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #14002B; }
+::-webkit-scrollbar-track { background: #021412; }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #9333EA, #EC4899);
+    background: linear-gradient(180deg, #10B981, #06B6D4);
     border-radius: 10px;
 }
 
-/* 3. SIDEBAR IN ROYAL PURPLE */
+/* 3. SIDEBAR IN DEEP FOREST TEAL */
 [data-testid="stSidebar"],
 [data-testid="stSidebar"] > div:first-child {
-    background: linear-gradient(180deg, rgba(15, 0, 34, 0.96) 0%, rgba(36, 5, 66, 0.96) 100%) !important;
-    border-right: 1px solid rgba(192, 132, 252, 0.25) !important;
+    background: linear-gradient(180deg, rgba(2, 18, 16, 0.97) 0%, rgba(6, 40, 35, 0.97) 100%) !important;
+    border-right: 1px solid rgba(52, 211, 153, 0.22) !important;
     backdrop-filter: blur(14px);
 }
 [data-testid="stSidebar"] * {
-    color: #F3E8FF !important;
+    color: #ECFDF5 !important;
 }
 
 /* 4. TYPOGRAPHY */
@@ -133,13 +133,13 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700 !important;
 }
 p, span, label, .stMarkdown {
-    color: #F3E8FF !important;
+    color: #D1FAE5 !important;
 }
 
 /* 5. HERO BANNER WITH FLOATING & SHIMMER EFFECTS */
 .animated-hero {
-    background: linear-gradient(135deg, rgba(147, 51, 234, 0.38) 0%, rgba(76, 29, 149, 0.68) 100%);
-    border: 1px solid rgba(216, 180, 254, 0.42);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(6, 95, 70, 0.55) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.38);
     padding: 36px 26px;
     border-radius: 26px;
     backdrop-filter: blur(18px);
@@ -149,13 +149,17 @@ p, span, label, .stMarkdown {
     margin-bottom: 25px;
     position: relative;
     overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.animated-hero:hover {
+    border-color: rgba(45, 212, 191, 0.75);
 }
 
 .shimmer-title {
     font-size: 2.75rem;
     font-weight: 800;
     margin-bottom: 8px;
-    background: linear-gradient(90deg, #FFFFFF, #E9D5FF, #F472B6, #C084FC, #FFFFFF);
+    background: linear-gradient(90deg, #FFFFFF, #A7F3D0, #2DD4BF, #FBBF24, #FFFFFF);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -168,22 +172,28 @@ p, span, label, .stMarkdown {
     font-size: 2.5rem;
 }
 
-/* 6. GLOWING METRIC CARDS WITH HOVER LIFT */
+/* 6. TACTILE GLOWING METRIC CARDS (HOVER + TOUCH PRESS) */
 .animated-metric {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.45) 0%, rgba(192, 38, 211, 0.38) 100%);
-    border: 1px solid rgba(216, 180, 254, 0.38);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.26) 0%, rgba(6, 182, 212, 0.22) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.38);
     border-radius: 20px;
     padding: 22px 12px;
     text-align: center;
     backdrop-filter: blur(14px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.28s ease, border-color 0.28s ease;
     animation: fadeInUp 0.7s ease-out;
+    cursor: pointer;
+    user-select: none;
 }
 .animated-metric:hover {
     transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 14px 34px rgba(217, 70, 239, 0.55);
-    border-color: rgba(244, 114, 182, 0.85);
+    box-shadow: 0 14px 34px rgba(16, 185, 129, 0.45);
+    border-color: rgba(45, 212, 191, 0.9);
+}
+.animated-metric:active {
+    transform: translateY(-2px) scale(0.97);
+    box-shadow: 0 6px 18px rgba(6, 182, 212, 0.5);
 }
 .animated-metric h2 {
     color: #FFFFFF !important;
@@ -192,7 +202,7 @@ p, span, label, .stMarkdown {
     font-weight: 700;
 }
 .animated-metric p {
-    color: #E9D5FF !important;
+    color: #A7F3D0 !important;
     font-size: 0.9rem;
     margin-top: 4px;
     margin-bottom: 0;
@@ -200,37 +210,43 @@ p, span, label, .stMarkdown {
     letter-spacing: 1.2px;
 }
 
-/* 7. FROSTED GLASS CARDS */
+/* 7. FROSTED GLASS CARDS WITH TACTILE HOVER */
 .glass-card {
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.055);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(216, 180, 254, 0.25);
+    border: 1px solid rgba(52, 211, 153, 0.24);
     border-radius: 20px;
     padding: 24px;
-    box-shadow: 0 10px 34px 0 rgba(18, 0, 38, 0.42);
+    box-shadow: 0 10px 34px 0 rgba(1, 16, 14, 0.48);
     margin-bottom: 22px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInUp 0.7s ease-out;
 }
 .glass-card:hover {
-    border-color: rgba(216, 180, 254, 0.48);
+    border-color: rgba(45, 212, 191, 0.55);
+    box-shadow: 0 14px 38px rgba(16, 185, 129, 0.18);
 }
 
-/* 8. SPECIES SHOWCASE CARDS */
+/* 8. SPECIES SHOWCASE CARDS (HOVER + TOUCH PRESS) */
 .species-card {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(216, 180, 254, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(52, 211, 153, 0.25);
     border-radius: 18px;
     padding: 22px 18px;
     text-align: center;
     backdrop-filter: blur(14px);
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
 }
 .species-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 12px 30px rgba(168, 85, 247, 0.5);
-    border-color: rgba(244, 114, 182, 0.7);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 32px rgba(45, 212, 191, 0.35);
+    border-color: rgba(251, 191, 36, 0.75);
+}
+.species-card:active {
+    transform: translateY(-2px) scale(0.97);
 }
 .badge {
     display: inline-block;
@@ -241,55 +257,77 @@ p, span, label, .stMarkdown {
     margin-top: 10px;
 }
 
-/* 9. VIBRANT PURPLE-PINK ACTION BUTTONS WITH SHINE SWEEP */
+/* 9. VIBRANT EMERALD-CYAN ACTION BUTTONS WITH LIGHT-SWEEP & TAP EFFECT */
 div.stButton > button {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(90deg, #9333EA 0%, #D946EF 50%, #EC4899 100%) !important;
+    background: linear-gradient(90deg, #059669 0%, #10B981 50%, #06B6D4 100%) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
     font-size: 1.05rem !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
     border-radius: 14px !important;
     padding: 12px 28px !important;
-    box-shadow: 0 6px 22px rgba(217, 70, 239, 0.45) !important;
-    transition: all 0.3s ease !important;
+    box-shadow: 0 6px 22px rgba(16, 185, 129, 0.4) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+}
+div.stButton > button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transition: left 0.5s ease;
+}
+div.stButton > button:hover::before {
+    left: 130%;
 }
 div.stButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 10px 30px rgba(217, 70, 239, 0.75) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.65) !important;
+}
+div.stButton > button:active {
+    transform: scale(0.97) !important;
 }
 
-/* 10. STYLED TABS & SLIDERS */
+/* 10. STYLED TABS */
 .stTabs [data-baseweb="tab-list"] {
     gap: 10px;
     background: rgba(255, 255, 255, 0.05);
     padding: 6px;
     border-radius: 14px;
-    border: 1px solid rgba(216, 180, 254, 0.2);
+    border: 1px solid rgba(52, 211, 153, 0.22);
 }
 .stTabs [data-baseweb="tab"] {
     border-radius: 10px;
-    color: #E9D5FF !important;
+    color: #A7F3D0 !important;
     font-weight: 600;
     padding: 8px 18px;
+    transition: all 0.25s ease;
 }
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(90deg, #9333EA, #D946EF) !important;
+    background: linear-gradient(90deg, #059669, #06B6D4) !important;
     color: #FFFFFF !important;
 }
 
 /* TECH PILLS */
 .tech-pill {
     display: inline-block;
-    background: rgba(168, 85, 247, 0.25);
-    border: 1px solid rgba(216, 180, 254, 0.4);
-    color: #FAF5FF;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(52, 211, 153, 0.45);
+    color: #ECFDF5;
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
     margin: 4px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+.tech-pill:hover {
+    transform: translateY(-2px);
+    background: rgba(6, 182, 212, 0.32);
 }
 </style>
 
@@ -300,49 +338,86 @@ div.stButton > button:hover {
 # ==========================================
 # 3. DATA LOADING & MODEL TRAINING
 # ==========================================
+COLUMN_ALIASES = {
+    "sepal_length": ["sepal_length", "sepallength", "sepallengthcm", "sepal_len", "sl"],
+    "sepal_width": ["sepal_width", "sepalwidth", "sepalwidthcm", "sepal_wid", "sw"],
+    "petal_length": ["petal_length", "petallength", "petallengthcm", "petal_len", "pl"],
+    "petal_width": ["petal_width", "petalwidth", "petalwidthcm", "petal_wid", "pw"],
+    "species": ["species", "variety", "class", "target", "label", "iris_species", "flower_species"]
+}
+
+def normalize_iris_df(raw_df):
+    if raw_df is None or raw_df.empty:
+        return None
+    df_copy = raw_df.copy()
+    cleaned_cols = [
+        str(c).strip().lower().replace(".", "_").replace("-", "_").replace(" ", "_").replace("(cm)", "").strip("_")
+        for c in df_copy.columns
+    ]
+    df_copy.columns = cleaned_cols
+
+    rename_map = {}
+    for canonical, aliases in COLUMN_ALIASES.items():
+        for col in df_copy.columns:
+            if col in aliases or col.replace("_", "") in aliases:
+                rename_map[col] = canonical
+                break
+    df_copy = df_copy.rename(columns=rename_map)
+
+    required = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"]
+    if not all(col in df_copy.columns for col in required):
+        return None
+
+    df_copy = df_copy[required].copy()
+    for col in ["sepal_length", "sepal_width", "petal_length", "petal_width"]:
+        df_copy[col] = pd.to_numeric(df_copy[col], errors="coerce")
+    df_copy = df_copy.dropna()
+
+    if df_copy.empty:
+        return None
+
+    df_copy["species"] = (
+        df_copy["species"]
+        .astype(str)
+        .str.replace("Iris-", "", case=False, regex=False)
+        .str.strip()
+        .str.capitalize()
+    )
+    return df_copy
+
 @st.cache_data
 def get_dataset():
     candidate_files = [
+        "iris_extended.xlsx",
         "IRIS FLOWER CLASSIFICATION.csv.xlsx",
         "IRIS FLOWER CLASSIFICATION.csv",
         "iris.csv",
         "IRIS.csv",
         "dataset.csv"
     ]
-    df = None
+    for f in os.listdir("."):
+        if f.endswith((".csv", ".xlsx")) and "iris" in f.lower() and f not in candidate_files:
+            candidate_files.append(f)
+
     for fname in candidate_files:
         if os.path.exists(fname):
             try:
-                df = pd.read_excel(fname) if fname.endswith(".xlsx") else pd.read_csv(fname)
-                break
+                raw_df = pd.read_excel(fname) if fname.endswith(".xlsx") else pd.read_csv(fname, sep=None, engine="python")
+                parsed = normalize_iris_df(raw_df)
+                if parsed is not None:
+                    return parsed, ["sepal_length", "sepal_width", "petal_length", "petal_width"]
             except Exception:
                 continue
 
-    if df is None:
-        for f in os.listdir("."):
-            if f.endswith((".csv", ".xlsx")) and "iris" in f.lower():
-                try:
-                    df = pd.read_excel(f) if f.endswith(".xlsx") else pd.read_csv(f)
-                    break
-                except Exception:
-                    pass
-
-    if df is None:
-        raw = load_iris()
-        df = pd.DataFrame(raw.data, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
-        df['species'] = pd.Series(raw.target).map({0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'})
-    else:
-        df.columns = [c.strip().lower().replace(" ", "_").replace("(cm)", "").strip("_") for c in df.columns]
-        if 'species' in df.columns:
-            df['species'] = df['species'].astype(str).str.replace('Iris-', '', regex=False).str.strip().str.capitalize()
-
-    feature_cols = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
-    return df, feature_cols
+    raw = load_iris()
+    df_fallback = pd.DataFrame(raw.data, columns=["sepal_length", "sepal_width", "petal_length", "petal_width"])
+    df_fallback["species"] = pd.Series(raw.target).map({0: "Setosa", 1: "Versicolor", 2: "Virginica"})
+    return df_fallback, ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 
 @st.cache_resource
 def train_model(df_data):
-    X = df_data[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']]
-    y = df_data['species']
+    X = df_data[["sepal_length", "sepal_width", "petal_length", "petal_width"]]
+    y = df_data["species"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
@@ -354,7 +429,13 @@ def train_model(df_data):
 
 df, feature_names = get_dataset()
 model, X, y, X_train, X_test, y_train, y_test, y_pred_model, accuracy = train_model(df)
-species_counts = df['species'].value_counts().to_dict()
+species_counts = df["species"].value_counts().to_dict()
+
+SPECIES_COLORS = {
+    "Setosa": "#FB7185",      # Coral Rose
+    "Versicolor": "#2DD4BF",  # Bioluminescent Teal
+    "Virginica": "#FBBF24"    # Warm Amber Gold
+}
 
 flower_info = {
     "Setosa": {
@@ -367,32 +448,32 @@ flower_info = {
     },
     "Virginica": {
         "image": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Iris_virginica.jpg",
-        "desc": "🌸 **Iris Virginica** has the longest petals and sepals among the three species, showcasing rich, deep purple-violet tones."
+        "desc": "🌸 **Iris Virginica** has the longest petals and sepals among the three species, showcasing rich, deep tones."
     }
 }
 
-def apply_purple_theme(fig):
+def apply_emerald_theme(fig):
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#FAF5FF", family="Poppins"),
-        title_font=dict(color="#FAF5FF", size=16),
-        legend=dict(font=dict(color="#FAF5FF"))
+        font=dict(color="#ECFDF5", family="Poppins"),
+        title_font=dict(color="#ECFDF5", size=16),
+        legend=dict(font=dict(color="#ECFDF5"))
     )
-    fig.update_xaxes(gridcolor="rgba(216, 180, 254, 0.14)", zerolinecolor="rgba(216, 180, 254, 0.2)")
-    fig.update_yaxes(gridcolor="rgba(216, 180, 254, 0.14)", zerolinecolor="rgba(216, 180, 254, 0.2)")
+    fig.update_xaxes(gridcolor="rgba(52, 211, 153, 0.14)", zerolinecolor="rgba(52, 211, 153, 0.22)")
+    fig.update_yaxes(gridcolor="rgba(52, 211, 153, 0.14)", zerolinecolor="rgba(52, 211, 153, 0.22)")
     return fig
 
 # ==========================================
 # 4. SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.markdown("## 🌸 **Iris AI Hub**")
+st.sidebar.markdown("## 🌿 **Iris AI Hub**")
 st.sidebar.markdown("Intelligent flower classification suite.")
 st.sidebar.markdown(
-    f"<div style='background: rgba(168, 85, 247, 0.22); border: 1px solid rgba(216, 180, 254, 0.35); "
+    f"<div style='background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(52, 211, 153, 0.35); "
     f"border-radius: 12px; padding: 10px 14px; margin: 10px 0 18px 0; font-size: 0.85rem;'>"
     f"<b>Dataset:</b> {len(df):,} samples<br>"
-    f"<b>Accuracy:</b> {accuracy * 100:.2f}%</div>",
+    f"<b>Species:</b> {df['species'].nunique()} classes</div>",
     unsafe_allow_html=True
 )
 
@@ -412,13 +493,13 @@ page = st.sidebar.radio(
 if page == "🏠 Home":
     st.markdown("""
     <div class="animated-hero">
-        <span class="floating-flower">🌸</span>
+        <span class="floating-flower">🌿</span>
         <h1 class="shimmer-title">Iris Flower AI Classifier</h1>
-        <p style="font-size: 1.12rem; color: #DDD6FE; margin: 0 auto; max-width: 660px;">
+        <p style="font-size: 1.12rem; color: #A7F3D0; margin: 0 auto; max-width: 660px;">
             An intelligent machine learning platform for botanical recognition, morphology analysis, and real-time species classification.
         </p>
         <div style="margin-top: 16px;">
-            <span style="background: rgba(168, 85, 247, 0.4); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(216, 180, 254, 0.45); font-size: 0.85rem; color: #FAF5FF; font-weight: 600;">
+            <span style="background: rgba(16, 185, 129, 0.28); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(52, 211, 153, 0.45); font-size: 0.85rem; color: #ECFDF5; font-weight: 600;">
                 ⚡ Model Status: Active & Trained (Random Forest)
             </span>
         </div>
@@ -469,28 +550,28 @@ if page == "🏠 Home":
         <div class="glass-card" style="height: 100%;">
             <h3 style="margin-top: 0;">✨ Botanical Intelligence</h3>
             <p>Trained across <b>{len(df):,} botanical records</b>, this model extracts patterns from four physical features:</p>
-            <ul style="color: #E9D5FF; line-height: 1.85;">
+            <ul style="color: #D1FAE5; line-height: 1.85;">
                 <li><b>🌿 Sepal Dimensions:</b> Outer protective calyx measurements.</li>
                 <li><b>🌺 Petal Dimensions:</b> Core distinguishing floral proportions.</li>
             </ul>
-            <hr style="border: 0; border-top: 1px solid rgba(216, 180, 254, 0.25); margin: 18px 0;">
+            <hr style="border: 0; border-top: 1px solid rgba(52, 211, 153, 0.25); margin: 18px 0;">
             <p style="margin-bottom: 6px;"><b>🚀 Quick Navigation:</b></p>
-            <p style="font-size: 0.95rem; color: #DDD6FE; margin: 0;">
-                Navigate to <b>🔮 Prediction</b> to test custom inputs, or <b>📊 Dashboard</b> to inspect the Confusion Matrix and feature correlations!
+            <p style="font-size: 0.95rem; color: #A7F3D0; margin: 0;">
+                Navigate to <b>🔮 Prediction</b> to test custom inputs, or <b>📊 Dashboard</b> to explore 3D clusters, radar profiles, and feature correlations!
             </p>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("")
-    st.markdown("<h3 style='text-align: center; margin-bottom: 20px;'>🌸 Meet the Three Iris Species</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; margin-bottom: 20px;'>🌿 Meet the Three Iris Species</h3>", unsafe_allow_html=True)
     s1, s2, s3 = st.columns(3)
 
     with s1:
         st.markdown(f"""
         <div class="species-card">
-            <h4 style="color: #F472B6 !important; margin: 0 0 6px 0;">Iris Setosa</h4>
-            <p style="font-size: 0.9rem; color: #DDD6FE; margin: 0;">Smallest petals, high sepal width. Cleanest separation boundary.</p>
-            <span class="badge" style="background: rgba(244, 114, 182, 0.28); color: #FCE7F3; border: 1px solid #F472B6;">
+            <h4 style="color: #FB7185 !important; margin: 0 0 6px 0;">Iris Setosa</h4>
+            <p style="font-size: 0.9rem; color: #D1FAE5; margin: 0;">Smallest petals, high sepal width. Cleanest separation boundary.</p>
+            <span class="badge" style="background: rgba(251, 113, 133, 0.22); color: #FFE4E6; border: 1px solid #FB7185;">
                 {species_counts.get('Setosa', 0):,} Samples
             </span>
         </div>
@@ -499,9 +580,9 @@ if page == "🏠 Home":
     with s2:
         st.markdown(f"""
         <div class="species-card">
-            <h4 style="color: #C084FC !important; margin: 0 0 6px 0;">Iris Versicolor</h4>
-            <p style="font-size: 0.9rem; color: #DDD6FE; margin: 0;">Medium petal and sepal sizes. Distinct blue-violet coloration.</p>
-            <span class="badge" style="background: rgba(192, 132, 252, 0.28); color: #F3E8FF; border: 1px solid #C084FC;">
+            <h4 style="color: #2DD4BF !important; margin: 0 0 6px 0;">Iris Versicolor</h4>
+            <p style="font-size: 0.9rem; color: #D1FAE5; margin: 0;">Medium petal and sepal sizes. Balanced floral proportions.</p>
+            <span class="badge" style="background: rgba(45, 212, 191, 0.22); color: #CCFBF1; border: 1px solid #2DD4BF;">
                 {species_counts.get('Versicolor', 0):,} Samples
             </span>
         </div>
@@ -510,9 +591,9 @@ if page == "🏠 Home":
     with s3:
         st.markdown(f"""
         <div class="species-card">
-            <h4 style="color: #818CF8 !important; margin: 0 0 6px 0;">Iris Virginica</h4>
-            <p style="font-size: 0.9rem; color: #DDD6FE; margin: 0;">Longest petals and sepals. Deep violet-purple structures.</p>
-            <span class="badge" style="background: rgba(129, 140, 248, 0.28); color: #E0E7FF; border: 1px solid #818CF8;">
+            <h4 style="color: #FBBF24 !important; margin: 0 0 6px 0;">Iris Virginica</h4>
+            <p style="font-size: 0.9rem; color: #D1FAE5; margin: 0;">Longest petals and sepals. Bold, expansive floral structure.</p>
+            <span class="badge" style="background: rgba(251, 191, 36, 0.22); color: #FEF3C7; border: 1px solid #FBBF24;">
                 {species_counts.get('Virginica', 0):,} Samples
             </span>
         </div>
@@ -525,7 +606,7 @@ elif page == "🔮 Prediction":
     st.markdown("""
     <div class="animated-hero" style="padding: 24px; margin-bottom: 20px;">
         <h1 class="shimmer-title" style="font-size: 2.2rem;">🔮 Predict Flower Species</h1>
-        <p style="color: #DDD6FE; margin: 0;">Adjust the morphological sliders to classify your Iris flower in real time</p>
+        <p style="color: #A7F3D0; margin: 0;">Adjust the morphological sliders to classify your Iris flower in real time</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -536,16 +617,16 @@ elif page == "🔮 Prediction":
         st.markdown("#### 🌿 Sepal Dimensions")
         sepal_length = st.slider(
             "Sepal Length (cm)",
-            min_value=float(round(X['sepal_length'].min() - 0.2, 1)),
-            max_value=float(round(X['sepal_length'].max() + 0.2, 1)),
-            value=float(round(X['sepal_length'].mean(), 1)),
+            min_value=float(round(X["sepal_length"].min() - 0.2, 1)),
+            max_value=float(round(X["sepal_length"].max() + 0.2, 1)),
+            value=float(round(X["sepal_length"].mean(), 1)),
             step=0.1
         )
         sepal_width = st.slider(
             "Sepal Width (cm)",
-            min_value=float(round(X['sepal_width'].min() - 0.2, 1)),
-            max_value=float(round(X['sepal_width'].max() + 0.2, 1)),
-            value=float(round(X['sepal_width'].mean(), 1)),
+            min_value=float(round(X["sepal_width"].min() - 0.2, 1)),
+            max_value=float(round(X["sepal_width"].max() + 0.2, 1)),
+            value=float(round(X["sepal_width"].mean(), 1)),
             step=0.1
         )
 
@@ -553,21 +634,21 @@ elif page == "🔮 Prediction":
         st.markdown("#### 🌺 Petal Dimensions")
         petal_length = st.slider(
             "Petal Length (cm)",
-            min_value=float(round(X['petal_length'].min() - 0.2, 1)),
-            max_value=float(round(X['petal_length'].max() + 0.2, 1)),
-            value=float(round(X['petal_length'].mean(), 1)),
+            min_value=float(round(X["petal_length"].min() - 0.2, 1)),
+            max_value=float(round(X["petal_length"].max() + 0.2, 1)),
+            value=float(round(X["petal_length"].mean(), 1)),
             step=0.1
         )
         petal_width = st.slider(
             "Petal Width (cm)",
-            min_value=float(round(X['petal_width'].min() - 0.1, 1)),
-            max_value=float(round(X['petal_width'].max() + 0.2, 1)),
-            value=float(round(X['petal_width'].mean(), 1)),
+            min_value=float(round(X["petal_width"].min() - 0.1, 1)),
+            max_value=float(round(X["petal_width"].max() + 0.2, 1)),
+            value=float(round(X["petal_width"].mean(), 1)),
             step=0.1
         )
     st.markdown('</div>', unsafe_allow_html=True)
 
-    predict_btn = st.button("🌸 Classify Flower Now", use_container_width=True)
+    predict_btn = st.button("🌿 Classify Flower Now", use_container_width=True)
 
     if predict_btn:
         input_sample = pd.DataFrame(
@@ -581,7 +662,7 @@ elif page == "🔮 Prediction":
         st.balloons()
 
         st.markdown(f"""
-        <div style="background: linear-gradient(90deg, #9333EA, #C026D3, #EC4899); padding: 20px; border-radius: 18px; text-align: center; margin: 20px 0; box-shadow: 0 8px 28px rgba(192, 38, 211, 0.5);">
+        <div style="background: linear-gradient(90deg, #059669, #0D9488, #06B6D4); padding: 20px; border-radius: 18px; text-align: center; margin: 20px 0; box-shadow: 0 8px 28px rgba(16, 185, 129, 0.5);">
             <h2 style="color: white !important; margin: 0;">🎉 Identified Species: Iris {prediction} ({top_conf:.1f}% Confidence)</h2>
         </div>
         """, unsafe_allow_html=True)
@@ -616,13 +697,9 @@ elif page == "🔮 Prediction":
                 prob_df,
                 x="Probability",
                 y="Species",
-                orientation='h',
+                orientation="h",
                 color="Species",
-                color_discrete_map={
-                    "Setosa": "#F472B6",
-                    "Versicolor": "#C084FC",
-                    "Virginica": "#818CF8"
-                },
+                color_discrete_map=SPECIES_COLORS,
                 text="Confidence (%)",
                 range_x=[0, 1]
             )
@@ -632,47 +709,95 @@ elif page == "🔮 Prediction":
                 xaxis_title="Probability",
                 yaxis_title=""
             )
-            apply_purple_theme(fig_prob)
+            apply_emerald_theme(fig_prob)
             st.plotly_chart(fig_prob, use_container_width=True)
 
 # ==========================================
-# PAGE 3: 📊 DASHBOARD & CONFUSION MATRIX
+# PAGE 3: 📊 EYE-CATCHING DASHBOARD (NO ACCURACY)
 # ==========================================
 elif page == "📊 Dashboard":
     st.markdown("""
     <div class="animated-hero" style="padding: 24px; margin-bottom: 20px;">
-        <h1 class="shimmer-title" style="font-size: 2.2rem;">📊 Analysis Graphs & Model Evaluation</h1>
-        <p style="color: #DDD6FE; margin: 0;">Interactive confusion matrix, correlation heatmap, 3D clusters, and feature distributions</p>
+        <h1 class="shimmer-title" style="font-size: 2.2rem;">📊 Botanical Analytics & Visual Dashboard</h1>
+        <p style="color: #A7F3D0; margin: 0;">Interactive species radar, 3D cluster projections, confusion matrix, and morphology distributions</p>
     </div>
     """, unsafe_allow_html=True)
 
-    # Top KPI Row
     k1, k2, k3 = st.columns(3)
     with k1:
         st.markdown(f"""
         <div class="animated-metric">
             <h2>{len(df):,}</h2>
-            <p>Total Samples</p>
+            <p>Total Records</p>
         </div>
         """, unsafe_allow_html=True)
     with k2:
         st.markdown(f"""
         <div class="animated-metric">
             <h2>{len(X_train):,}</h2>
-            <p>Training Samples</p>
+            <p>Training Split (80%)</p>
         </div>
         """, unsafe_allow_html=True)
     with k3:
         st.markdown(f"""
         <div class="animated-metric">
             <h2>{len(X_test):,}</h2>
-            <p>Testing Samples</p>
+            <p>Testing Split (20%)</p>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("")
 
-    tab1, tab2, tab3 = st.tabs(["🎯 Model Evaluation", "🧬 Correlations & 3D View", "📈 Feature Distributions"])
+    ov1, ov2 = st.columns([1, 1.2])
+    with ov1:
+        st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+        st.markdown("#### 🍩 Species Composition")
+        count_df = df["species"].value_counts().reset_index()
+        count_df.columns = ["Species", "Count"]
+        fig_donut = px.pie(
+            count_df,
+            names="Species",
+            values="Count",
+            hole=0.58,
+            color="Species",
+            color_discrete_map=SPECIES_COLORS
+        )
+        fig_donut.update_traces(textinfo="percent+label", textfont_size=13)
+        fig_donut.update_layout(height=360, showlegend=False)
+        apply_emerald_theme(fig_donut)
+        st.plotly_chart(fig_donut, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with ov2:
+        st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+        st.markdown("#### 🕸️ Average Morphology Radar")
+        means_df = df.groupby("species")[feature_names].mean()
+        radar_labels = [f.replace("_", " ").title() for f in feature_names]
+        fig_radar = go.Figure()
+        for sp in means_df.index:
+            vals = means_df.loc[sp].tolist()
+            fig_radar.add_trace(go.Scatterpolar(
+                r=vals + [vals[0]],
+                theta=radar_labels + [radar_labels[0]],
+                fill="toself",
+                name=sp,
+                line=dict(color=SPECIES_COLORS.get(sp, "#2DD4BF"), width=2.5),
+                opacity=0.72
+            ))
+        fig_radar.update_layout(
+            polar=dict(
+                bgcolor="rgba(0,0,0,0)",
+                radialaxis=dict(visible=True, gridcolor="rgba(52, 211, 153, 0.22)", tickfont=dict(color="#A7F3D0")),
+                angularaxis=dict(gridcolor="rgba(52, 211, 153, 0.22)", tickfont=dict(color="#ECFDF5", size=12))
+            ),
+            height=360,
+            margin=dict(l=40, r=40, t=25, b=25)
+        )
+        apply_emerald_theme(fig_radar)
+        st.plotly_chart(fig_radar, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    tab1, tab2, tab3 = st.tabs(["🎯 Confusion Matrix & Importance", "🧬 3D Cluster & Correlations", "📈 Feature Distributions"])
 
     with tab1:
         c1, c2 = st.columns([1, 1])
@@ -687,11 +812,11 @@ elif page == "📊 Dashboard":
                 text_auto=True,
                 x=labels,
                 y=labels,
-                color_continuous_scale="Purples",
+                color_continuous_scale="Teal",
                 labels=dict(x="Predicted Species", y="Actual Species", color="Count")
             )
             fig_cm.update_layout(height=380)
-            apply_purple_theme(fig_cm)
+            apply_emerald_theme(fig_cm)
             st.plotly_chart(fig_cm, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
@@ -709,16 +834,16 @@ elif page == "📊 Dashboard":
                 y="Feature",
                 orientation="h",
                 color="Importance",
-                color_continuous_scale="Magenta",
+                color_continuous_scale="Tealgrn",
                 text_auto=".3f"
             )
             fig_imp.update_layout(height=380, showlegend=False)
-            apply_purple_theme(fig_imp)
+            apply_emerald_theme(fig_imp)
             st.plotly_chart(fig_imp, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-        st.markdown("#### Classification Report")
+        st.markdown("#### Per-Class Precision, Recall & F1-Score")
         report_dict = classification_report(y_test, y_pred_model, output_dict=True)
         report_df = pd.DataFrame(report_dict).transpose().drop(index="accuracy", errors="ignore").round(3)
         st.dataframe(report_df, use_container_width=True)
@@ -733,10 +858,10 @@ elif page == "📊 Dashboard":
             fig_corr = px.imshow(
                 corr,
                 text_auto=True,
-                color_continuous_scale="RdPu"
+                color_continuous_scale="YlGnBu"
             )
             fig_corr.update_layout(height=420)
-            apply_purple_theme(fig_corr)
+            apply_emerald_theme(fig_corr)
             st.plotly_chart(fig_corr, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
@@ -750,15 +875,11 @@ elif page == "📊 Dashboard":
                 y="petal_length",
                 z="petal_width",
                 color="species",
-                color_discrete_map={
-                    "Setosa": "#F472B6",
-                    "Versicolor": "#C084FC",
-                    "Virginica": "#818CF8"
-                },
+                color_discrete_map=SPECIES_COLORS,
                 opacity=0.85
             )
             fig_3d.update_layout(height=420, margin=dict(l=0, r=0, b=0, t=20))
-            apply_purple_theme(fig_3d)
+            apply_emerald_theme(fig_3d)
             st.plotly_chart(fig_3d, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
@@ -775,14 +896,10 @@ elif page == "📊 Dashboard":
             y=selected_feat,
             color="species",
             box=True,
-            color_discrete_map={
-                "Setosa": "#F472B6",
-                "Versicolor": "#C084FC",
-                "Virginica": "#818CF8"
-            }
+            color_discrete_map=SPECIES_COLORS
         )
         fig_box.update_layout(height=430, showlegend=False)
-        apply_purple_theme(fig_box)
+        apply_emerald_theme(fig_box)
         st.plotly_chart(fig_box, use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -793,7 +910,7 @@ elif page == "ℹ️ About":
     st.markdown("""
     <div class="animated-hero" style="padding: 24px; margin-bottom: 20px;">
         <h1 class="shimmer-title" style="font-size: 2.2rem;">ℹ️ About Iris Flower AI</h1>
-        <p style="color: #DDD6FE; margin: 0;">Architecture, dataset statistics, and technology stack</p>
+        <p style="color: #A7F3D0; margin: 0;">Architecture, dataset statistics, and technology stack</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -807,7 +924,7 @@ elif page == "ℹ️ About":
                 It trains a <b>Random Forest Classifier</b> (100 decision trees) on botanical sepal and petal measurements
                 to identify <i>Iris Setosa</i>, <i>Iris Versicolor</i>, and <i>Iris Virginica</i> in real time.
             </p>
-            <hr style="border: 0; border-top: 1px solid rgba(216, 180, 254, 0.25); margin: 16px 0;">
+            <hr style="border: 0; border-top: 1px solid rgba(52, 211, 153, 0.25); margin: 16px 0;">
             <h4>🛠️ Tech Stack</h4>
             <div>
                 <span class="tech-pill">Python</span>
